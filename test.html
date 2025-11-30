@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指尖绘西湖 - 探索人间天堂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+
+        /* 自定义滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c0c4cc;
+            border-radius: 3px;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #909399;
+        }
+        ::-webkit-scrollbar-button {
+            display: none;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #303133;
+            line-height: 1.6;
+        }
+
+        /* 头部导航 */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-size: 22px;
+            color: #165DFF;
+            font-weight: 600;
+        }
+        .header .menu-icon {
+            width: 24px;
+            height: 24px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23303133'%3E%3Cpath d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/%3E%3C/svg%3E") no-repeat center;
+        }
+
+        /* 横幅区域 */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 8s ease;
+        }
+        .banner:hover img {
+            transform: scale(1.05);
+        }
+        .banner .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+        }
+        .banner h2 {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            font-size: 32px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .banner p {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            絮安: 11-03 15:40:26
+          font-size: 16px;
+            color: #fff;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
+
+        /* 主要内容区 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 功能卡片区 */
+        .features {
+            margin: 30px 0;
+        }
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #165DFF;
+        }
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .feature-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .feature-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .feature-card .content {
+            padding: 20px;
+        }
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #165DFF;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #606266;
+        }
+
+        /* 景点展示区 */
+        .attractions {
+            margin: 40px 0;
+        }
+        .attraction-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .attraction-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .attraction-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .attraction-item .info {
+            padding: 15px;
+        }
+        .attraction-item h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .attraction-item .tag {
+            display: inline-block;
+            font-size: 12px;
+            color: #165DFF;
+            background: rgba(22, 93, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 文化介绍区 */
+        .culture {
+            margin: 40px 0;
+            background: #fff;
+
+絮安: 11-03 15:40:40
+           border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .culture p {
+            margin-bottom: 15px;
+            color: #606266;
+        }
+        .culture-img {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            margin: 20px 0;
+            object-fit: cover;
+        }
+
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 99;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #909399;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .nav-item.active {
+            color: #165DFF;
+        }
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+
+        /* 预留底部空间 */
+        .footer-space {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <div class="header">
+        <h1>指尖绘西湖</h1>
+        <div class="menu-icon"></div>
+    </div>
+
+    <!-- 横幅区域 -->
+    <div class="banner">
+        <img src="https://picsum.photos/id/1036/1600/900" alt="西湖全景">
+        <div class="overlay"></div>
+        <h2>人间天堂·西湖</h2>
+        <p>三面云山一面城，淡妆浓抹总相宜</p>
+    </div>
+
+    <!-- 主要内容区 -->
+    <div class="container">
+        <!-- 功能卡片 -->
+        <section class="features">
+            <h3 class="section-title">核心功能</h3>
+            <div class="card-grid">
+                <div class="feature-card">
+                    <img src="https://picsum.photos/id/1039/800/600" alt="十景闯关">
+                    <div class="content">
+                        <h3>十景闯关</h3>
+                        <p>探索西湖十景，解锁每个景点的趣味知识关卡，边游边学，深入了解西湖文化底蕴。</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="https://picsum.photos/id/1051/800/600" alt="路线规划">
+                    <div class="content">
+                        <h3>路线规划</h3>
+                        <p>根据游览时间、兴趣偏好，智能推荐最佳游览路线，避开人潮，体验最美西湖。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 景点展示 -->
+        <section class="attractions">
+            <h3 class="section-title">西湖十景精选</h3>
+            <div class="attraction-list">
+                <div class="attraction-item">
+                    <img src="https://picsum.photos/id/1037/600/400" alt="苏堤春晓">
+                    <div class="info">
+                        <h4>苏堤春晓</h4>
+                        <span class="tag">春季</span>
+                    </div>
+
+絮安: 11-03 15:40:55
+             </div>
+                <div class="attraction-item">
+                    <img src="https://picsum.photos/id/1040/600/400" alt="曲院风荷">
+                    <div class="info">
+                        <h4>曲院风荷</h4>
+                        <span class="tag">夏季</span>
+                    </div>
+                </div>
+                <div class="attraction-item">
+                    <img src="https://picsum.photos/id/1043/600/400" alt="平湖秋月">
+                    <div class="info">
+                        <h4>平湖秋月</h4>
+                        <span class="tag">秋季</span>
+                    </div>
+                </div>
+                <div class="attraction-item">
+                    <img src="https://picsum.photos/id/1050/600/400" alt="断桥残雪">
+                    <div class="info">
+                        <h4>断桥残雪</h4>
+                        <span class="tag">冬季</span>
+                    </div>
+                </div>
+                <div class="attraction-item">
+                    <img src="https://picsum.photos/id/1054/600/400" alt="柳浪闻莺">
+                    <div class="info">
+                        <h4>柳浪闻莺</h4>
+                        <span class="tag">鸟类</span>
+                    </div>
+                </div>
+                <div class="attraction-item">
+                    <img src="https://picsum.photos/id/1055/600/400" alt="花港观鱼">
+                    <div class="info">
+                        <h4>花港观鱼</h4>
+                        <span class="tag">赏花</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文化介绍 -->
+        <section class="culture">
+            <h3 class="section-title">西湖文化</h3>
+            <p>西湖文化景观是自然美与人文美完美结合的典范，它孕育了"三面云山一面城"的城市格局，也催生了大量的诗词歌赋、神话传说。</p>
+            <p>从白居易、苏东坡治理西湖，到梁山伯与祝英台的爱情故事，再到济公活佛的传说，西湖承载了丰富的文化内涵。</p>
+            <img src="https://picsum.photos/id/1061/1200/600" alt="西湖文化" class="culture-img">
+            <p>2011年6月24日，"杭州西湖文化景观"正式被列入《世界遗产名录》，成为中国第41处世界遗产，其核心价值在于"它是中国历代文化精英秉承'天人合一'哲理，在深厚的中国古典文学、绘画美学、造园艺术和技巧传统背景下，持续进行景观设计与营造的杰出范例。"</p>
+        </section>
+
+        <!-- 底部预留空间 -->
+        <div class="footer-space"></div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <div class="nav-icon" style="background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23165DFF%22%3E%3Cpath d=%22M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z%22/%3E%3C/svg%3E') no-repeat center;"></div>
+            <span>首页</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23909399%22%3E%3Cpath d=%22M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM14 5h-4v6l-2.29 1.71L6 12l4-4 4 4-1.71 1.71L10 11V5z%22/%3E%3C/svg%3E') no-repeat center;"></div>
+            <span>闯关</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23909399%22%3E%3Cpath d=%22M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.31C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z%22/%3E%3C/svg%3E') no-repeat center;"></div>
+            <span>路线</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon" style="background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23909399%22%3E%3Cpath d=%22M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z%22/%3E%3C/svg%3E') no-repeat center;"></div>
+            <span>我的</span>
+        </a>
+    </div>
+</body>
+</html>
